@@ -32,7 +32,7 @@ def onRadioButtonsClicked(label):
     Обработчик события при клике по типу датчика
     """
     global F_k
-    dic_F_k = {'1 кг' : -41.274,'3 кг': -107.3, '5 кг': 87.85, '10 кг':  -378.42, '20 кг': -356.59}
+    dic_F_k = {'1 кг' : -41.274,'3 кг': -107.3, '5 кг': 87.85, '10 кг':  -378.42, '2 кг': -95.791}
     return dic_F_k[label]
 
 def tar_F(V, null_point=0, k = 1):
@@ -305,7 +305,7 @@ def add_figets():
             act_sensor = 4
 
     axes_radiobuttons = plt.axes([-0.02, 0.4, 0.11, 0.11], frameon=False, aspect='equal')# координаты left bottom width height
-    radiobuttons= RadioButtons(axes_radiobuttons,['1 кг', '3 кг', '5 кг', '10 кг','20 кг'], activecolor='black', active = act_sensor)
+    radiobuttons= RadioButtons(axes_radiobuttons,['1 кг', '3 кг', '5 кг', '10 кг','2 кг'], activecolor='black', active = act_sensor)
     onRadioButtonsClicked(radiobuttons.value_selected)
     radiobuttons.on_clicked(onRadioButtonsClicked)
     #Создание слайдеров

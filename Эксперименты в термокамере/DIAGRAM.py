@@ -293,6 +293,7 @@ def addPlot (graph_axes,kernel,kernel_1,kernel_A_end,kernel_Fmax,kernel_L):
     print('$A_{1} = %.5g$ Дж\n$A_{2} = %.5g$ Дж\n$A_{Σ} =%.5g$ Дж' %(A1,A2,A_sum))
     print('$k_{A1} = %.4g$\n$k_{A2} = %.4g$ \n$k_{AΣ} = %.4g$ \n$A_{2}/A_{Σ} = %.4g$ \n$W_{max} = %.4g$ мм \n$W_{A2} = %.4g$ мм ' %(kp1,kp2,kp_sum,k_a, Wmax, WA2))
     fig2.savefig(filename[0:-4]+ ' ' + str(h_ice) + ' мм' + ' данные' +'.png')
+    
     fig2.clear()
     fig.savefig(filename[0:-4] + ' ' + str(h_ice) + ' мм' '.png')
     plt.draw()
@@ -329,7 +330,7 @@ def onButtonClicked(event):
     graph_axes.grid()
     #Если возвращать работу разрушения - добавить сюда 4 переменной ,kernel_A_S.val здесь
     addPlot(graph_axes,kernel_S.val,kernel_1_S.val,kernel_A_end.val,kernel_Fmax.val,kernel_L.val) 
-
+    np.savetxt(filename[0:-4]+'_new.txt',np.vstack((np.array([[0,0],[0,0]]),data)))#сохранение файла в то же место но с новым именем для будущих нужд
     
 def Change_slider(value):
      #Если возвращать работу разрушения - добавить сюда 4 переменной ,kernel_A_S.val здесь
