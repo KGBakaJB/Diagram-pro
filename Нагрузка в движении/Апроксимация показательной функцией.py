@@ -67,7 +67,7 @@ root = tk.Tk()
 width = root.winfo_screenwidth()
 height = root.winfo_screenheight()
 fig = plt.figure(figsize=(width/100., height/100.))
-fig.subplots_adjust(left=0.09,right=0.95, top= 0.97, bottom=0.25)
+fig.subplots_adjust(left=0.09,right=0.95, top= 0.97, bottom=0.1)
 plt.rcParams.update({'font.size': 18})
 plt.gca().xaxis.set_major_locator(mtick.MultipleLocator(0.1))
 plt.gca().yaxis.set_major_locator(mtick.MultipleLocator(0.1))
@@ -93,51 +93,51 @@ KG15 = np.sort(KG15, axis = 0)
 KG21 = np.sort(KG21, axis = 0)
 widh = 3
 print(k,'/n',b)
-plt.scatter(KG5[:,0],KG5[:,1], c = color1, label = "11,32 "+kg)
-plt.plot(KG5[:,0],func(KG5[:,0],*popt), c = color1, label = '$w_{max}$=%.3f$e^{%.3f v}$'%(k,b))
-plt.plot(np.arange(KG5[0,0], RIGHT, 0.01), Xeis(111,np.arange(KG5[0,0], RIGHT, 0.01) ), c = color1, linestyle = "dashed", linewidth = widh)
+plt.scatter(KG5[:,0],KG5[:,1], label = "11,32 "+kg)
+plt.plot(KG5[:,0],func(KG5[:,0],*popt), label = '$w_{max}$=%.3f$e^{%.3f v}$'%(k,b))
+# plt.plot(np.arange(KG5[0,0], RIGHT, 0.01), Xeis(111,np.arange(KG5[0,0], RIGHT, 0.01) ), c = color1, linestyle = "dashed", linewidth = widh)
 
 
 popt,pcov = curve_fit(func,KG10[:,0],KG10[:,1], maxfev=10**6)
 k,b = popt
 print(k,'/n',b)
-plt.scatter(KG10[:,0],KG10[:,1], c = color2, label = "16,32 "+kg)
-plt.plot(KG10[:,0],func(KG10[:,0],*popt), c = color2, label = '$w_{max}$=%.3f$e^{%.3f v}$'%(k,b))
-plt.plot(np.arange(KG10[0,0], RIGHT, 0.01), Xeis(160,np.arange(KG10[0,0], RIGHT, 0.01) ), c = color2, linestyle = "dashed", linewidth = widh)
+plt.scatter(KG10[:,0],KG10[:,1], label = "16,32 "+kg)
+plt.plot(KG10[:,0],func(KG10[:,0],*popt), label = '$w_{max}$=%.3f$e^{%.3f v}$'%(k,b))
+# plt.plot(np.arange(KG10[0,0], RIGHT, 0.01), Xeis(160,np.arange(KG10[0,0], RIGHT, 0.01) ), c = color2, linestyle = "dashed", linewidth = widh)
 
 
 popt,pcov = curve_fit(func,KG15[:,0],KG15[:,1], maxfev=10**6)
 k,b = popt
 print(k,'/n',b)
-plt.scatter(KG15[:,0],KG15[:,1], c = color3, label = "21,32 "+kg)
-plt.plot(KG15[:,0],func(KG15[:,0],*popt), c = color3, label = '$w_{max}$=%.3f$e^{%.3f v}$'%(k,b))
-plt.plot(np.arange(KG15[0,0], RIGHT, 0.01), Xeis(209,np.arange(KG15[0,0], RIGHT, 0.01) ), c = color3, linestyle = "dashed", linewidth = widh)
+plt.scatter(KG15[:,0],KG15[:,1], label = "21,32 "+kg)
+plt.plot(KG15[:,0],func(KG15[:,0],*popt), label = '$w_{max}$=%.3f$e^{%.3f v}$'%(k,b))
+# plt.plot(np.arange(KG15[0,0], RIGHT, 0.01), Xeis(209,np.arange(KG15[0,0], RIGHT, 0.01) ), c = color3, linestyle = "dashed", linewidth = widh)
 
 popt,pcov = curve_fit(func,KG21[:,0],KG21[:,1], maxfev=10**6)
 k,b = popt
 print(k,'/n',b)
-plt.scatter(KG21[:,0],KG21[:,1], c = color4, label = "27,32 "+kg)
-plt.plot(KG21[:,0],func(KG21[:,0],*popt), c = color4, label = '$w_{max}$=%.3f$e^{%.3f v}$'%(k,b))
-plt.plot(np.arange(KG21[0,0], RIGHT, 0.01), Xeis(268,np.arange(KG21[0,0], RIGHT, 0.01) ), c = color4, linestyle = "dashed", linewidth = widh)
-plt.scatter(zero,0.278, c = color1, s = 95, marker = 'X')
-plt.scatter(zero,0.401, c = color2, s = 95, marker = 'X')
-plt.scatter(zero,0.524, c = color3, s = 95, marker = 'X')
-plt.scatter(zero,0.672, c = color4, s = 95, marker = 'X')
+plt.scatter(KG21[:,0],KG21[:,1], label = "27,32 "+kg)
+plt.plot(KG21[:,0],func(KG21[:,0],*popt), label = '$w_{max}$=%.3f$e^{%.3f v}$'%(k,b))
+# plt.plot(np.arange(KG21[0,0], RIGHT, 0.01), Xeis(268,np.arange(KG21[0,0], RIGHT, 0.01) ), c = color4, linestyle = "dashed", linewidth = widh)
 
-"""
+plt.scatter(zero,0.278, c = 'dodgerblue', s = 95, marker = 'X')
+plt.scatter(zero,0.401, c = 'orange', s = 95, marker = 'X')
+plt.scatter(zero,0.524, c = 'g', s = 95, marker = 'X')
+plt.scatter(zero,0.672, c = 'r', s = 95, marker = 'X')
+
 plt.xlabel("Load travel velocity $\it{v}$, m/s")
 plt.ylabel("Maximum deflection of the ice cover $w_{max}$, mm")
 """
 plt.xlabel("Скорость движения нагрузки $\it{v}$, м/c")
 plt.ylabel("Максимальный прогиб ледяного покрова $w_{max}$, мм")
-
+"""
 plt.grid()
-plt.legend(loc = 'lower center',
-            mode = 'expand',
-            borderaxespad = 20,
-            prop={'size':16},
-            bbox_to_anchor=(0.5,-1),
-            ncol = 4
-            )
+# plt.legend(loc = 'lower center',
+#             mode = 'expand',
+#             borderaxespad = 20,
+#             prop={'size':16},
+#             bbox_to_anchor=(0.5,-1),
+#             ncol = 4
+#             )
 plt.show()
 

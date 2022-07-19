@@ -91,15 +91,7 @@ kernel_A=20000 #Индекс точки в массиве данных, до к�
 """
 
 filename=askopenfilename()
-h_ice=input('Введите величину толщины льда в мм \n')
-i=1
-while i==1:
-    try:
-        h_ice=float(h_ice)
-        i=2
-    except:
-            print('Введите число корректно')
-            h_ice=input()
+h_ice=2
 if h_ice<10:
     gran_d=3 
 else:
@@ -156,7 +148,7 @@ if __name__=='__main__':
         global graph_axes
         #атрибуд val необходим для получения значения с ползунков
         addPlot(graph_axes,kernel_S.val,kernel_1_S.val)
-        np.savetxt(filename,data)
+        np.savetxt(filename[0:-4]+'_new.txt',data)
     def Change_slider(value):
 
         interact_point(graph_axes,kernel_S.val,kernel_1_S.val)
@@ -171,8 +163,8 @@ if __name__=='__main__':
    
 
     # Создание кнопки "Пересчет"
-    axes_button_add=plt.axes([0.1,0.008,0.01,0.01])# координаты
-    button_add=Button(axes_button_add,' ')
+    axes_button_add=plt.axes([0.6,0.02,0.1,0.1])# координаты
+    button_add=Button(axes_button_add,'SAVE')
     button_add.on_clicked(onButtonClicked)# вызов функции события при нажатии на кнопку
     #Создание слайдеров
      # координаты слайдеров
@@ -185,7 +177,6 @@ if __name__=='__main__':
 
     kernel_S.on_changed(Change_slider)
     kernel_1_S.on_changed(Change_slider)
-
 
 
     plt.show()

@@ -73,10 +73,10 @@ for f in files:
     data_save = np.copy(data_S)
     sensor_len = 6 
     index = (np.abs(data_S[:,1]-np.argmin(data_S[:,1]))).argmax()
-    # ax4.set_xlabel('Distanse on ice field $\mathit{l}$, m',size = 20)
-    # ax4.set_ylabel('Deflection $\mathit{w}$, mm',size = 20)
-    ax4.set_xlabel('Длина ледяной пластины $\mathit{l}$, м',size = 20)
-    ax4.set_ylabel('Прогиб $\mathit{w}$, мм',size = 20)
+    ax4.set_xlabel('Distanse on ice field, m',size = 20)
+    ax4.set_ylabel('Deflection $\mathit{w}$, mm',size = 20)
+    # ax4.set_xlabel('Длина ледяной пластины $\mathit{l}$, м',size = 20)
+    # ax4.set_ylabel('Прогиб $\mathit{w}$, мм',size = 20)
     
     ax4.tick_params(labelsize = 20)
     
@@ -119,14 +119,14 @@ for f in files:
     #Area = np.trapz(y = data_S[mid_indx:right_indx, 1], x = data_S[mid_indx:right_indx, 0])/np.trapz(y = data_S[left_indx:mid_indx, 1], x = data_S[left_indx:mid_indx, 0])
     
 
+    ax4.plot(data_S[:, 0],
+              data_S[:, 1], 
+              label = ("Velocity: " + f.split('_')[-2]+" m/s \n" + "Deflection: "+ str("%.3f" %float(f.split(" ")[0])) + " mm" ))
+    
     # ax4.plot(data_S[:, 0],
     #          data_S[:, 1], 
-    #          label = ("Velocity: " + f.split('_')[-2]+" m/s \n" + "Deflection: "+ str("%.3f" %float(f.split(" ")[0])) + " mm" ))
-    
-    ax4.plot(data_S[:, 0],
-             data_S[:, 1], 
-             #label = ("Скорость: " + f.split('_')[-2]+" м/с \n" + "Прогиб: "+ str("%.3f" %float(f.split(" ")[0])) + " мм" ),linewidth = 1.8, c = 'black', linestyle = lines[i])
-             label = ("Скорость: " + f.split('_')[-2]+" м/с \n" + "Прогиб: "+ str("%.3f" %float(f.split(" ")[0])) + " мм" ),linewidth = 1.8)
+    #          #label = ("Скорость: " + f.split('_')[-2]+" м/с \n" + "Прогиб: "+ str("%.3f" %float(f.split(" ")[0])) + " мм" ),linewidth = 1.8, c = 'black', linestyle = lines[i])
+    #          label = ("Скорость: " + f.split('_')[-2]+" м/с \n" + "Прогиб: "+ str("%.3f" %float(f.split(" ")[0])) + " мм" ),linewidth = 1.8)
     i += 1
              
              
@@ -167,9 +167,9 @@ def w_arr(x,P):
 
 
 # ax4.plot(x,w_arr(x,-11.32)*1000,linewidth = 3, c = plt.cm.viridis(0), label ="Static deflection")
-
-ax4.plot(x,w_arr(x,-27.32)*1000,linewidth = 3, c = 'black', label ="Статический прогиб")
-ax4.plot(-1*x,w_arr(x,-27.32)*1000,linewidth = 3, c = 'black')
+M = 26.32
+ax4.plot(x,w_arr(x,-M)*1000,linewidth = 3, c = 'black', label ="Статический прогиб")
+ax4.plot(-1*x,w_arr(x,-M)*1000,linewidth = 3, c = 'black')
 
 Df = pd.DataFrame(data = {"Скорость":vel, "Площадь впадины": area1, "Площадь горба": area2})
 # Df.to_excel('excel.xlsx', float_format="%.9f")

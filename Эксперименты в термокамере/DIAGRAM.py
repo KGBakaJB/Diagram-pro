@@ -125,6 +125,30 @@ def two_point_line_z(arg_1, arg_2):
 
     return (((X-x1)*(0-y1))/(x2-x1))+y1# Y выраженый из уравнения прямой через 2 точки
 
+def F_arh(data):
+    from math import pi
+    
+    height_of_stamp = 0.015 # высота штампа
+    diametr = 0.05 #метры
+    
+    S = (pi*diametr**2) / 4
+    if Nag == False:
+        data = data[F_max+1, 0] - (ro * S * height_of_stamp )#V*ro
+
+    else:
+        index = (np.abs(data[:, 1] - h_ice)).argmin() # ищем индекс точки касания штампа воды
+        #в массиве данных перемещения
+        while data[index, 1] < h_ice:
+            index += 1
+        index2 = (np.abs(data[:, 1] - (h_ice + height_of_stamp))).argmin()# ищем индекс точки полного 
+        #погружения штампа в воду в массиве данных перемещения
+        
+        if data[index2, 1] < (h_ice + height_of_stamp):
+            index2 += 1
+        data[index:index2, 0]  -= ro * S * (data[index:index2, 1] - h_ice)
+        data[index2:, 0] -= height_of_stamp * ro * S
+ 
+
 # добавить ,kernel_A если возвращать работу разрушения на 4 позицию здесь
 def addPlot (graph_axes,kernel,kernel_1,kernel_A_end,kernel_Fmax,kernel_L):
     """
@@ -160,7 +184,8 @@ def addPlot (graph_axes,kernel,kernel_1,kernel_A_end,kernel_Fmax,kernel_L):
     data[:,1]=corect_w(data,two_point_line(kernel, kernel_1))  # коректировка перемещения и как следствие массива данных
     
     if gran_d != 0:
-        F_arh()
+        F_arh(data)
+
     # лимиты отображения области
     graph_axes.set_xlim([0,float(kernel_A_end+1)])  
     if data[F_max, 0] < 8:
@@ -349,28 +374,6 @@ def h_of_ice():
             h_ice=h_list[0] + '.' + h_list[1]
             h_ice=float(h_ice) 
             
-
-def F_arh():
-    from math import pi
-    height_of_stamp = 0.015 # высота штампа
-    diametr = 0.05 #метры
-    S = (pi*diametr**2) / 4
-    if Nag == False:
-        data[F_max+1, 0] - ro * S * height_of_stamp #V*ro
-    else:
-        index = (np.abs(data[:, 1] - h_ice)).argmin() # ищем индекс точки касания штампа воды
-        #в массиве данных перемещения
-        if data[index, 1] < h_ice:
-            index += 1
-        index2 = (np.abs(data[:, 1] - (h_ice + height_of_stamp))).argmin()# ищем индекс точки полного 
-        #погружения штампа в воду в массиве данных перемещения
-        
-        if data[index2, 1] < (h_ice + height_of_stamp):
-            index2 += 1
-        data[index:index2, 0]  -= ro * S * (data[index:index2, 1] - h_ice)
-        data[index2:, 0] -= height_of_stamp * ro * S
-       
-       # ro*h*0.03927 #ro*h*S 
         
 puas=0.35 #Значение коэффициента Пуассона льда
 g=9.81 #Ускорение свободного падения

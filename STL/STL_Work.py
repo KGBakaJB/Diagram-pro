@@ -72,7 +72,7 @@ x_scale = 2
 y_scale = 0.5
 z_scale = 2
 scale = np.diag([x_scale, y_scale, z_scale, 1.0])
-scale =scale * (1.0/scale.max())
+scale = scale * (1.0/scale.max())
 scale[3,3] = 1.0
 
 

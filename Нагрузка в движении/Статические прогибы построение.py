@@ -51,7 +51,7 @@ color2 = plt.cm.viridis(0.4)
 color3 = plt.cm.viridis(0.7)
 color4 = plt.cm.viridis(.9)
 
-ENG = False
+ENG = True
 fig = plt.figure()       
 ax1 = fig.add_subplot()
 plt.rcParams.update({'font.size': 16})
@@ -72,8 +72,8 @@ fig.subplots_adjust(left=0.09,right=0.95, top= 0.97, bottom=0.2)
 # ax1.plot(x,w_arr(x,-11.32)*1000, c=color1, label ="11.32"+kg)
 # ax1.plot(-1*x,w_arr(x,-11.32)*1000, c=color1)
 
-ax1.plot(x,w_arr2(x,-11.32)*1000, c=color1, label ="11.32"+kg)
-ax1.plot(-1*x,w_arr2(x,-11.32)*1000, c=color1)
+ax1.plot(x,w_arr2(x,-11.32)*1000, c='dodgerblue', label ="11.32"+kg)
+ax1.plot(-1*x,w_arr2(x,-11.32)*1000, c='dodgerblue')
 
 
 
@@ -81,8 +81,8 @@ ax1.plot(-1*x,w_arr2(x,-11.32)*1000, c=color1)
 # ax1.plot(x,w_arr(x,-16.32)*1000, c=color2, label ="16.32"+kg)
 # ax1.plot(-1*x,w_arr(x,-16.32)*1000, c=color2)
 
-ax1.plot(x,w_arr2(x,-16.32)*1000, c=color2, label ="16.32"+kg)
-ax1.plot(-1*x,w_arr2(x,-16.32)*1000, c=color2)
+ax1.plot(x,w_arr2(x,-16.32)*1000, c='orange', label ="16.32"+kg)
+ax1.plot(-1*x,w_arr2(x,-16.32)*1000, c='orange')
 
 
 
@@ -90,8 +90,8 @@ ax1.plot(-1*x,w_arr2(x,-16.32)*1000, c=color2)
 # ax1.plot(x,w_arr(x,-21.32)*1000, c=color3, label ="21.32"+kg)
 # ax1.plot(-1*x,w_arr(x,-21.32)*1000, c=color3)
 
-ax1.plot(x,w_arr2(x,-21.32)*1000, c=color3, label ="21.32"+kg)
-ax1.plot(-1*x,w_arr2(x,-21.32)*1000, c=color3)
+ax1.plot(x,w_arr2(x,-21.32)*1000, c='g', label ="21.32"+kg)
+ax1.plot(-1*x,w_arr2(x,-21.32)*1000, c='g')
 
 
 
@@ -99,8 +99,8 @@ ax1.plot(-1*x,w_arr2(x,-21.32)*1000, c=color3)
 # ax1.plot(x,w_arr(x,-27.32)*1000, c=color4, label ="27.32"+kg)
 # ax1.plot(-1*x,w_arr(x,-27.32)*1000, c=color4)
 
-ax1.plot(x,w_arr2(x,-27.32)*1000, c=color1, label ="27.32"+kg)
-ax1.plot(-1*x,w_arr2(x,-27.32)*1000, c=color1)
+ax1.plot(x,w_arr2(x,-27.32)*1000, c='r', label ="27.32"+kg)
+ax1.plot(-1*x,w_arr2(x,-27.32)*1000, c='r')
 
 
 ax1.legend(loc = 'lower center',

@@ -83,8 +83,8 @@ plt.rcParams.update({'font.size': 16})
 ax1 = fig.add_subplot(2,2,1)
 
 Xmaj = 0.2
-ENG = 0
-dep = 1.98
+ENG = 1
+dep = 0.8
 hump = 0.064
 zero = 0
 
@@ -103,13 +103,13 @@ else:
 
 
 ax1.set_xlim(0, data[np.argmax(data[:,0]),0]*1.1)
-ax1.set_ylim(0, data[np.argmax(data[:,1]),1]*1.4)
+ax1.set_ylim(0, 12)
 
 if ENG == True:
     ax1.scatter(x, y, s=55, c=color1, label = "Area of the depression, $A_{dep}$")
-    ax1.scatter(zero,dep, s = 85, c = color1, marker = "X")
+    ax1.scatter(0.3,5, s = 85, c = color1, marker = "X")
     ax1.scatter(x, y2, s = 55, c=color2, label = "Area of the hump, $A_{hump}$")
-    ax1.scatter(zero,hump, s = 85, c = color2, marker = "X")
+    ax1.scatter(0.3,3, s = 85, c = color2, marker = "X")
 else:
     ax1.scatter(x, y, s=55, c=color1, label = "Площадь впадины, $A_{вп}$ ")
     ax1.scatter(zero,dep, s=85, c = color1, marker = "X")
@@ -133,12 +133,12 @@ if ENG == False:
     ax2.set_ylabel('Отношение площадей, $A_{вп}$/$A_{гор}$')
     ax2.set_xlabel('Скорость, м\с')
     ax2.scatter(x, y3, s = 55, c=color3, label = "Отношение площадей, $A_{вп}$/$A_{гор}$")
-    ax2.scatter(zero,dep/hump,s = 85, c=color3, marker = "X")
+    #ax2.scatter(zero,dep/hump,s = 85, c=color3, marker = "X")
 else:
     ax2.set_ylabel('Area ratio, $A_{hump}$/$A_{dep}$')
     ax2.set_xlabel('Velocity, m\s')
     ax2.scatter(x, y3, s = 55, c=color3, label = "Area ratio, $A_{hump}$/$A_{dep}$")
-    ax2.scatter(zero,dep/hump,s = 85, c=color3, marker = "X")
+    ax2.scatter(0.3,17,s = 85, c=color3, marker = "X")
 plt.grid()
 
 
