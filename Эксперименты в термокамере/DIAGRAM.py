@@ -256,7 +256,7 @@ def addPlot (graph_axes,kernel,kernel_1,kernel_A_end,kernel_Fmax,kernel_L):
     Res_pd=pd.Series(ser)
     Res_pd.to_excel(filename[0:-4]+'.xlsx', float_format="%.6f", index=False, header=False)
 
-    graph_axes.plot(data[:,1],data[:,0])
+    graph_axes.plot(data[:kernel_L,1],data[:kernel_L,0])
      #Строим диаграмму разрушения с отметками
     if gran_d == 0:
         graph_axes.set_xlabel('Прогиб w, сантиметры')
