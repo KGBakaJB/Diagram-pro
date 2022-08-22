@@ -336,7 +336,7 @@ def onButtonClicked(event):
     graph_axes.grid()
     #Если возвращать работу разрушения - добавить сюда 4 переменной ,kernel_A_S.val здесь
     addPlot(graph_axes,kernel_S.val,kernel_1_S.val,kernel_A_end.val,kernel_Fmax.val,kernel_L.val) 
-    np.savetxt(filename[0:-4]+'_new.txt',np.vstack((np.array([[0,0],[0,0]]),data[:int(kernel_L.val)], np.array([[0, int(kernel_A_end.val)]]))))#сохранение файла в то же место но с новым именем для будущих нужд
+    np.savetxt(filename[0:-4]+'_new.txt',np.vstack((np.array([[0,0],[0,0]]),data[:int(kernel_L.val)], np.array([[0, int(kernel_Fmax.val)]]))))#сохранение файла в то же место но с новым именем для будущих нужд
     
 def Change_slider(value):
      #Если возвращать работу разрушения - добавить сюда 4 переменной ,kernel_A_S.val здесь
