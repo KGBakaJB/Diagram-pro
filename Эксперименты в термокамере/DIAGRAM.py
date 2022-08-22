@@ -154,7 +154,7 @@ def F_arh(data):
 
 # добавить ,kernel_A если возвращать работу разрушения на 4 позицию здесь
 def addPlot (graph_axes,kernel,kernel_1,kernel_A_end,kernel_Fmax,kernel_L):
-    global data
+    global data, ker
     """
     Функция строющая окончательный граффик, принимает значения со слайдеров
     """
@@ -182,6 +182,8 @@ def addPlot (graph_axes,kernel,kernel_1,kernel_A_end,kernel_Fmax,kernel_L):
     kernel_1=int(kernel_1)
    # kernel_A=int(kernel_A)
     kernel_A_end=float(kernel_A_end)-two_point_line(kernel, kernel_1)# Можно использовать float т.к. далее это число используется только в исскуственным массивом
+    
+    ker = kernel_A_end
     Fmax=int(kernel_Fmax)
     kernel_L=int(kernel_L) #int необходим там где идет работа с конкретной величиной индекса в массиве данных
     
@@ -336,7 +338,7 @@ def onButtonClicked(event):
     graph_axes.grid()
     #Если возвращать работу разрушения - добавить сюда 4 переменной ,kernel_A_S.val здесь
     addPlot(graph_axes,kernel_S.val,kernel_1_S.val,kernel_A_end.val,kernel_Fmax.val,kernel_L.val) 
-    np.savetxt(filename[0:-4]+'_new.txt',np.vstack((np.array([[0,0],[0,0]]),data[:int(kernel_L.val)], np.array([[0, int(kernel_Fmax.val)]]))))#сохранение файла в то же место но с новым именем для будущих нужд
+    np.savetxt(filename[0:-4]+'_new.txt',np.vstack((np.array([[0,0],[0,0]]),data[:int(kernel_L.val)], np.array([[0, ker]]))))#сохранение файла в то же место но с новым именем для будущих нужд
     
 def Change_slider(value):
      #Если возвращать работу разрушения - добавить сюда 4 переменной ,kernel_A_S.val здесь
