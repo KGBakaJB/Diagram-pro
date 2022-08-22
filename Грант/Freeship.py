@@ -10,7 +10,7 @@ from tkinter.filedialog import askopenfilename
 import matplotlib.pyplot as plt
 import numpy as np
 from numba import jit
-from c import pdist
+
 
 
 
@@ -57,16 +57,11 @@ def cut_waterline(sterm, waterline):
 
 def ice_shirt_sterm(sterm, B=2):
     sterm = np.sort(sterm,axis = 0)
-    Len = pdist(sterm[:,1:])
-    for i in range(len(Len)):
-        print(Len[i])
-    print(Len)
-    print(len(sterm[:,1:]))
-    print(np.sum(Len))
-    fig = plt.figure()
-    ax = plt.axes()
-    ax.plot(sterm[:, 1], sterm[:,2])
-    plt.grid()
+    l = np.sqrt(np.square(sterm[1:,0]-sterm[:-1,0])+np.square(sterm[1:,1]-sterm[:-1,1])+np.square(sterm[1:,2]-sterm[:-1,2]))
+    print(l)
+    #print(sterm)
+    print(np.sum(l))
+    input()
 
     
 filename=askopenfilename()
