@@ -10,7 +10,7 @@ from tkinter.filedialog import askopenfilename
 import matplotlib.pyplot as plt
 import numpy as np
 from numba import jit
-
+import open3d as o3d
 
 
 
@@ -58,10 +58,8 @@ def cut_waterline(sterm, waterline):
 def ice_shirt_sterm(sterm, B=2):
     sterm = np.sort(sterm,axis = 0)
     l = np.sqrt(np.square(sterm[1:,0]-sterm[:-1,0])+np.square(sterm[1:,1]-sterm[:-1,1])+np.square(sterm[1:,2]-sterm[:-1,2]))
-    print(l)
-    #print(sterm)
-    print(np.sum(l))
-    input()
+    pass
+
 
     
 filename=askopenfilename()
@@ -70,14 +68,66 @@ ice_shirt_sterm(sterms(data)[20], 4)
 
 
 #строим корпус:
-# fig = plt.figure()
-# ax = fig.gca(projection ='3d')
-# ax.scatter(data[5000:10000, 0],#Координата длины
-#             data[5000:10000, 1],#Координата ширины
-#             data[5000:10000, 2], color = "green")#Координата высоты
+fig = plt.figure()
+ax = fig.gca(projection ='3d')
+ax.scatter(data[:, 0],#Координата длины
+            data[:, 1],#Координата ширины
+            data[:, 2], color = "green")#Координата высоты
 
 
+
+ST = np.array(sterms(data)[3:5])
+print(ST)
+ST = np.vstack([ST[0], ST[1]])
+print('\n\n\n\n\n')
+ST = data
+pcd = o3d.geometry.PointCloud()
+pcd.points = o3d.utility.Vector3dVector(ST)
+pcd.normals = o3d.utility.Vector3dVector(np.zeros(
+    (1, 3)))  # invalidate existing normals
+
+pcd.estimate_normals(fast_normal_computation = False)
+pcd.orient_normals_consistent_tangent_plane(20)
+nor = np.asarray(pcd.normals)*-1
+pcd.normals = o3d.utility.Vector3dVector(nor)
+
+o3d.visualization.draw_geometries([pcd], point_show_normal=True)
+
+
+distances = pcd.compute_nearest_neighbor_distance()
+avg_dist = np.mean(distances)
+radius = 5 * avg_dist
+bpa_mesh = o3d.geometry.TriangleMesh.create_from_point_cloud_ball_pivoting(pcd,o3d.utility.DoubleVector([radius, radius * 2]))
+
+
+o3d.visualization.draw_geometries([bpa_mesh])
+
+
+# tetra_mesh, pt_map = o3d.geometry.TetraMesh.create_from_point_cloud(pcd)
+# alpha = 0.03
+# mesh = o3d.geometry.TriangleMesh.create_from_point_cloud_alpha_shape(
+#         pcd, alpha, tetra_mesh, pt_map)
+# mesh.compute_vertex_normals()
+# o3d.visualization.draw_geometries([mesh], mesh_show_back_face=True)
+# 
+
+
+# triangle = points.triangulate(inplace= False, progress_bar=True)
+# print(triangle)
+# triangle.plot(show_edges=True)
+# ST = np.random.permutation(ST)
+
+X = ST[:,0]
+Y = ST[:,1]
+Z = ST[:,2]
+# Y = np.hstack([sterms(data)[13][:,1], sterms(data)[14][:,1], sterms(data)[15], sterms(data)[16][:,1]])
+
+# X, Y = np.meshgrid(X, )
+
+
+# grid = pv.StructuredGrid(X, Y, Z)
+# grid.plot()
 # ax.set_xlim(None, 10)
 # ax.set_ylim(None, 40)
 # ax.set_zlim(None, 40)
-plt.show()
+# plt.show()
