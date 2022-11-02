@@ -33,7 +33,6 @@ def open_datafile(path,a=1,b=20000000):
     return data[a:(b+1)]
 
 
-
 def k_line(x2_arg):
     """
     Функция коэффициентов уравнения прямой по двум точкам, проходящей через начало координат
@@ -432,7 +431,7 @@ radiobuttons_k= RadioButtons(axes_radiobuttons_k,['Канал', 'Пролом'],
 radiobuttons_k.on_clicked(onRadioButtonsClicked_k)
 onRadioButtonsClicked_k(radiobuttons_k.value_selected)
 
-plt.rcParams.update({'font.size': 19})
+plt.rcParams.update({'font.size': 26})
 # Создание кнопки "Пересчет"
 axes_button_add=plt.axes([0.1,0.02,0.1,0.04])# координаты left bottom width height
 button_add=Button(axes_button_add,'Пересчёт')

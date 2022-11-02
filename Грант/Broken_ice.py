@@ -8,6 +8,8 @@ import numpy as np
 from matplotlib import pyplot as plt
 import matplotlib.ticker as mtick
 import Ice_methods as ice
+
+
                     # tgФ1  tgФ2   jлтф   jсф
 Geom_16 = np.array([0.530, 0.494, 3.328, 1.197,# 0 1 2 3
                     #Флт   Фс     Фп     Фпт
@@ -22,7 +24,7 @@ Geom_16 = np.array([0.530, 0.494, 3.328, 1.197,# 0 1 2 3
                     0.302, 0.290])             # 20 21
 
                     # tgФ1  tgФ2   jлтф   jсф
-Geom_tan = np.array([0.706, 4.704, 2.138, 0.722,# 0 1 2 3
+Geom_tanker = np.array([0.706, 4.704, 2.138, 0.722,# 0 1 2 3
                     #Флт   Фс     Фп     Фпт
                     5.336, 3.781, 0.004, 0.027,# 4 5 6 7
                     #Фи    Фит    Фик     Фитк
@@ -34,7 +36,7 @@ Geom_tan = np.array([0.706, 4.704, 2.138, 0.722,# 0 1 2 3
                     #Ф'гк   Фгтк
                     0.035, 0.128])             # 20 21
 
-Geom = Geom_tan
+Geom = Geom_tanker
 P_w = 140
 v0 = 6.11   
 v = np.arange(0, 7, 1)
@@ -49,7 +51,7 @@ for i in h:
        col[1] -= 0.1
        col[2] -= 0.1
 
-       ax.plot(v, ice.R_1(i, B, v, Geom) + ice.R_2(i, B, v, Geom) + ice.R_3(i, B, Geom), label = "Толщина льда " + str(round(i,2)) + " м", color = tuple(col))
+       ax.plot(v, ice.R_Kalinina(i, B, v, Geom) , label = "Толщина льда " + str(round(i,2)) + " м", color = tuple(col))
        ax.plot(v, ice.R_Zuev(i, B, v), linestyle = 'dashed', color = tuple(col), linewidth = 2)
        
                             
@@ -58,7 +60,7 @@ ax.set_xlabel('Скорость, м/c')
 ax.set_ylabel('Сопротвление\nТяга, кН')
 ax.set_xlim(0, 6)
 ax.xaxis.set_major_locator(mtick.MultipleLocator(0.5))
-#ax.yaxis.set_major_locator(mtick.MultipleLocator(20))
+
 plt.grid()
 ax.legend()
 plt.show()
