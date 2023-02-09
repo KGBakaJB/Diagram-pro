@@ -29,11 +29,12 @@ def open_datafile(path,a=1,b=20000000):
         
     except ValueError:
         file= open(path, encoding= 'ansi')#перекодировка из utf-8 в ansi из за странной ошибки в спайдере
-        data = pd.read_csv(file,sep='\s+' ,decimal=",",names = ['h', 'h_pr', 'Fmax', 'Wcr', 'A1', 'A2', 'Asum','ka1','ka2', 'ksum', 'A1/A','w_max', 'wsup', 'D', 'E', 'r'] ) #Читаю из тестового документа в качестве сепаратора: все пробелы
+        data = pd.read_csv(file,sep='\s+' ,decimal=",") #Читаю из тестового документа в качестве сепаратора: все пробелы
         
     #у переменной data сейчас тип dataframe
     file.close()
-    return data
+    
+    return np.array(data)
 
     
 def plot_aprx(Koef,data):
@@ -112,13 +113,12 @@ dic_KN = {"1":['$F_{max}$' , 2.73, 2],
 SIZE= 58
 X = 0.05
 DIC = dic_DV
-F_DV = 1/1000
-F_KN = 1/1000
-
-
+F_DV = 1
+F_KN = 1
 
 filename=askopenfilename()# Вызов окна открытия файла
 data=open_datafile(filename) #Открыть файл
+
 
 data[:,0] *= 0.01
 data[:,1] *= F_DV
