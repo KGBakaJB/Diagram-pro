@@ -299,10 +299,10 @@ def addPlot (graph_axes,kernel,kernel_1,kernel_A_end,kernel_Fmax,kernel_L):
     fig2.text(0.4, 0.22, 'h_pr =%.2g$\n $A_{1} = %.5g$ Дж\n$A_{2} = %.5g$ Дж\n$A_{Σ} =%.5g$ Дж\n$h_л =%.4g$ cм $k_{A1} = %.4g$\n$k_{A2} = %.4g$ \n$k_{AΣ} = %.4g$ \n$A_{2}/A_{Σ} = %.4g$ \n$W_{max} = %.4g$ мм \n$W_{A2} = %.4g$ мм' %(h,A1,A2,A_sum,h,kp1,kp2,kp_sum,k_a, Wmax, WA2),size=14)
     print('h_pr =%.2g$ мм\n $A_{1} = %.5g$ Дж\n$A_{2} = %.5g$ Дж\n$A_{Σ} =%.5g$ Дж' %(h,A1,A2,A_sum))
     print('$k_{A1} = %.4g$\n$k_{A2} = %.4g$ \n$k_{AΣ} = %.4g$ \n$A_{2}/A_{Σ} = %.4g$ \n$W_{max} = %.4g$ мм \n$W_{A2} = %.4g$ мм ' %(kp1,kp2,kp_sum,k_a, Wmax, WA2))
-    fig2.savefig(filename[0:-4]+ ' ' + str(h_ice) + ' мм' + ' данные' +'.png')
+    fig2.savefig(filename[0:-4]+ ' ' + str(h_ice) + ' мм' + ' данные' +'.png', dpi = 300)
     
     fig2.clear()
-    fig.savefig(filename[0:-4] + ' ' + str(h_ice) + ' мм' '.png')
+    fig.savefig(filename[0:-4] + ' ' + str(h_ice) + ' мм' '.png', dpi = 300)
     plt.draw()
 
 # добавить ,kernel_A если возвращать работу разрушения на 4 позицию здесь
