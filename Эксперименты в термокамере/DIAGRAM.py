@@ -132,10 +132,8 @@ def F_arh(data):
     
     S = (pi*diametr**2) / 4
     if Nag == False:
+        data = data[F_max+1, 0] - (ro * S * height_of_stamp )#V*ro
 
-        data[F_max+1:, 0] = data[F_max+1:, 0] - (ro * S * height_of_stamp )#V*ro
-
-        return data
     else:
         index = (np.abs(data[:, 1] - h_ice)).argmin() # ищем индекс точки касания штампа воды
         #в массиве данных перемещения
@@ -148,12 +146,13 @@ def F_arh(data):
             index2 += 1
         data[index:index2, 0]  -= ro * S * (data[index:index2, 1] - h_ice)
         data[index2:, 0] -= height_of_stamp * ro * S
-        return data
  
 
 # добавить ,kernel_A если возвращать работу разрушения на 4 позицию здесь
 def addPlot (graph_axes,kernel,kernel_1,kernel_A_end,kernel_Fmax,kernel_L):
+
     global data, ker
+
     """
     Функция строющая окончательный граффик, принимает значения со слайдеров
     """
@@ -189,9 +188,7 @@ def addPlot (graph_axes,kernel,kernel_1,kernel_A_end,kernel_Fmax,kernel_L):
     data[:,1]=corect_w(data,two_point_line(kernel, kernel_1))  # коректировка перемещения и как следствие массива данных
     
     if gran_d != 0:
-
-        data = F_arh(data)
-        
+        F_arh(data)
 
     # лимиты отображения области
     graph_axes.set_xlim([0,float(kernel_A_end+1)])  
@@ -296,8 +293,8 @@ def addPlot (graph_axes,kernel,kernel_1,kernel_A_end,kernel_Fmax,kernel_L):
         print('$r_{0}$ = %.3g м\nD = %.5g Н/м\nE = 'r'$%.4g\times10^3$ МПа' %(r1,D,E/pow(10,9))) #Выводим значения D и E в консоль
         
     #здесь \n$A_р$ = %.5g Дж во 2 позицию и ,A_p
-    fig2.text(0.4, 0.22, 'h_pr =%.2g$\n $A_{1} = %.5g$ Дж\n$A_{2} = %.5g$ Дж\n$A_{Σ} =%.5g$ Дж\n$h_л =%.4g$ cм $k_{A1} = %.4g$\n$k_{A2} = %.4g$ \n$k_{AΣ} = %.4g$ \n$A_{2}/A_{Σ} = %.4g$ \n$W_{max} = %.4g$ мм \n$W_{A2} = %.4g$ мм' %(h,A1,A2,A_sum,h,kp1,kp2,kp_sum,k_a, Wmax, WA2),size=14)
-    print('h_pr =%.2g$ мм\n $A_{1} = %.5g$ Дж\n$A_{2} = %.5g$ Дж\n$A_{Σ} =%.5g$ Дж' %(h,A1,A2,A_sum))
+    fig2.text(0.4, 0.22, '$A_{1} = %.5g$ Дж\n$A_{2} = %.5g$ Дж\n$A_{Σ} =%.5g$ Дж\n$h_л =%.4g$ cм $k_{A1} = %.4g$\n$k_{A2} = %.4g$ \n$k_{AΣ} = %.4g$ \n$A_{2}/A_{Σ} = %.4g$ \n$W_{max} = %.4g$ мм \n$W_{A2} = %.4g$ мм' %(A1,A2,A_sum,h,kp1,kp2,kp_sum,k_a, Wmax, WA2),size=14)
+    print('$A_{1} = %.5g$ Дж\n$A_{2} = %.5g$ Дж\n$A_{Σ} =%.5g$ Дж' %(A1,A2,A_sum))
     print('$k_{A1} = %.4g$\n$k_{A2} = %.4g$ \n$k_{AΣ} = %.4g$ \n$A_{2}/A_{Σ} = %.4g$ \n$W_{max} = %.4g$ мм \n$W_{A2} = %.4g$ мм ' %(kp1,kp2,kp_sum,k_a, Wmax, WA2))
     fig2.savefig(filename[0:-4]+ ' ' + str(h_ice) + ' мм' + ' данные' +'.png', dpi = 300)
     
@@ -337,7 +334,10 @@ def onButtonClicked(event):
     graph_axes.grid()
     #Если возвращать работу разрушения - добавить сюда 4 переменной ,kernel_A_S.val здесь
     addPlot(graph_axes,kernel_S.val,kernel_1_S.val,kernel_A_end.val,kernel_Fmax.val,kernel_L.val) 
+
     np.savetxt(filename[0:-4]+'_new.txt',np.vstack((np.array([[0,0],[0,0]]),data[:int(kernel_L.val)], np.array([[0, ker]]))))#сохранение файла в то же место но с новым именем для будущих нужд
+    np.savetxt(filename[0:-4]+'_new.txt',np.vstack((np.array([[0,0],[0,0]]),data)))#сохранение файла в то же место но с новым именем для будущих нужд
+
     
 def Change_slider(value):
      #Если возвращать работу разрушения - добавить сюда 4 переменной ,kernel_A_S.val здесь
@@ -420,7 +420,7 @@ onRadioButtonsClickedLayer(radiobuttons_lay.value_selected)# вызов функ
 # Создание переключателя для типа нагружения
 
 for i in filename.split('/')[-1]:
-    if i == 'П' or i =='P' or  i =='п' or  i == "p":
+    if i == 'П' or i =='P' or  i =='Ц' or  i == "ЦП":
         act_nag = 1
         break
     else:
