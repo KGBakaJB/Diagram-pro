@@ -87,9 +87,7 @@ k,b = popt
 kg = "кг"
 Stat = "Cтатический прогиб"
 zero = 0.001
-print(KG5)
 KG5 = np.sort(KG5, axis = 0)
-print(KG5)
 KG10 = np.sort(KG10, axis = 0)
 KG15 = np.sort(KG15, axis = 0)
 KG21 = np.sort(KG21, axis = 0)

@@ -200,7 +200,7 @@ ST = sterms(data)
 # # data = autocad_open(filename)
 
     
-bpa_mesh = o3d_ball_triangle(data, 8)
+bpa_mesh = o3d_ball_triangle(data, 20)
 bpa_mesh.compute_vertex_normals()
 # o3d.visualization.draw_geometries([pcd], point_show_normal = True)
 bpa_mesh.paint_uniform_color([1., 0., 0.])
