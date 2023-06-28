@@ -9,17 +9,17 @@ import pandas as pd
 from tkinter.filedialog import askopenfilename
 import matplotlib.pyplot as plt
 import numpy as np
-from numba import jit
-<<<<<<< HEAD
+
+
 import open3d as o3d
 import pymeshfix
 from pymeshfix._meshfix import PyTMesh
 import pyvista as pv
-=======
+
 from c import pdist
 
 
->>>>>>> parent of 5fd7c39 (Небольшие изменения)
+
 
 def open_and_parse(path):
     file= open(path,encoding= 'ansi')
@@ -71,7 +71,7 @@ def cut_waterline(sterm, waterline):
     return np.vstack([sterm[A] ,np.array([sterm[0,0], inter_Y, waterline])]) # соединение массивов
     
 
-<<<<<<< HEAD
+
 def ice_shirt_sterm(sterm, waterline, B):
     sterm = np.sort(sterm,axis = 0) # точки отсортированы от ДП к борту
     sterm = cut_waterline(sterm, waterline)[::-1] # массив точек шпангоута ниже заданной ватерлинии отсортированный от борта к ДП
@@ -90,7 +90,7 @@ def ice_shirt_sterm(sterm, waterline, B):
               sterm = sterm[:i] # массив длин меньше чем массив координат на единицу,
               #обрезаем по тот член на котором уже больше чем В/2
               break
-=======
+
 def ice_shirt_sterm(sterm, B=2):
     sterm = np.sort(sterm,axis = 0)
     Len = pdist(sterm[:,1:])
@@ -103,7 +103,7 @@ def ice_shirt_sterm(sterm, B=2):
     ax = plt.axes()
     ax.plot(sterm[:, 1], sterm[:,2])
     plt.grid()
->>>>>>> parent of 5fd7c39 (Небольшие изменения)
+
 
     return np.vstack([sterm[:-1], sterm[-1] + ((sterm[-2] - sterm[-1])/(w-w1)) * (B/2 - w1)])
 
